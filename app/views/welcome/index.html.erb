@@ -1,2 +1,11 @@
-<h1>Welcome visitor</h1>
-<%= link_to 'My runs', controller: 'articles' %>
+<h1>Run statistic</h1>
+<% if user_signed_in? %>
+    <span>Здравствуйте, <%= current_user.email %></span>
+    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+    <br><br>
+    <%= link_to 'My runs', controller: 'articles' %>
+<% else %>
+    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+<% end %>
+
+
