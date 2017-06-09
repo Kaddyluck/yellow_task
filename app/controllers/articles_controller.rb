@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @articles = Article.all
   end
 
   def new
@@ -48,7 +49,7 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:distance, :time, :date)
+    params.require(:article).permit(:distance, :time, :date, :image)
   end
 
 

@@ -3,5 +3,6 @@ class Article < ApplicationRecord
   validates :time, presence: true, length: { minimum: 1 }
   validates :date, presence: true
 
+  mount_uploader :image, ImageUploader
   belongs_to :user
 end

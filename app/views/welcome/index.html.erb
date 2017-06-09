@@ -1,11 +1,12 @@
-<h1>Run statistic</h1>
+<h1 align="center">Run statistic</h1>
+<h3 align="center">
 <% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %></span>
+    <span>Здравствуйте, <%= current_user.email %></span> <br>
     <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
     <br><br>
     <%= link_to 'My runs', controller: 'articles' %>
 <% else %>
     <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
 <% end %>
-
+</h3>
 

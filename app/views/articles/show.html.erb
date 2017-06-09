@@ -1,11 +1,13 @@
+<h1 align="center">Jogging <%= @article.date.day%> <%= @article.date.strftime("%B")%></h1>
+
 <p>
   <strong>Distance:</strong>
-  <%= @article.distance %>
+  <%= @article.distance %> meters
 </p>
 
 <p>
   <strong>Time:</strong>
-  <%= @article.time %>
+  <%= @article.time %> minutes
 </p>
 
 <p>
@@ -13,5 +15,55 @@
   <%= @article.date %>
 </p>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to '< Back', articles_path %>
+
+<table align="center">
+  <col width="500">
+  <col width="200">
+  <col width="1000">
+
+  <tr>
+    <td>
+      <% week = @article.date.cweek %>
+      <% alldistance = 0 %>
+      <% alltime = 0 %>
+      <% alldays = 0 %>
+      <h3><b>Statistic:</b> <br></h3>
+      <b>Week:</b> <%= @article.date.cweek %> (<%= @article.date.beginning_of_week %> / <%= @article.date.end_of_week %>) <br>
+
+      <% @articles.each do |article| %>
+          <% if week == article.date.cweek %>
+              <% alldistance += article.distance.to_i %>
+              <% alltime += article.time.to_i*60 %>
+              <% alldays += 1 %>
+          <% end %>
+      <% end %>
+      <b>Av. speed:</b> <%= alldistance/alltime %>,<%= alldistance%alltime %> m/s &emsp;
+      <b>Av. time:</b> <%= (alltime/alldays)/60 %> minutes <%= (alltime/alldays)%60 %> seconds <br>
+      <b>Total Distance:</b> <%= alldistance %> meters
+    </td>
+
+    <td></td>
+
+    <td><p>
+      <%= image_tag @article.image_url(:large).to_s if @article.image_url.present? %>
+    </p>
+    </td>
+
+  </tr>
+</table>
+
+
+<p>
+  <% if @article.image_url.present? %>
+    <details>
+      <summary>Link to photo</summary>
+      <pre><%= @article.image %></pre>
+    </details>
+  <% end %>
+</p>
+
+
+
+
+<%= link_to '< Back', articles_path %> |
+<%= link_to 'Edit', edit_article_path(@article) %>
