@@ -3,4 +3,5 @@ class Article < ApplicationRecord
   validates :time, presence: true, length: { minimum: 1 }
   validates :date, presence: true
 
+  belongs_to :user
 end
